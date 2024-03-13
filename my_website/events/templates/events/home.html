@@ -1,6 +1,23 @@
-
-        <center>
-            <h1>this is my calender for {{year}} {{month}}!</h1>
-            <p>{{cal|safe}}</p>
-        </center>
-
+{% for event in event_list %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-12 col-md-12">
+      <div class="card text-dark bg-white border-dark mb-3">
+        <div class="card-header bg-dark text-white">{{ event.name }}</div>
+        <div class="card-body">
+          <p class="card-text">Event Date: {{ event.event_date }}</p>
+          <p class="card-text">Venue: {{ event.venue }}</p>
+          <p class="card-text">Managed By: {{ event.manager }}</p>
+          <p class="card-text">Description: {{ event.description }}</p>
+          <h5 class="card-title">Members:</h5>
+          <ul class="list-group list-group-flush">
+          {% for member in event.members.all %}
+              <li class="list-group-item">{{ member.first_name }} {{ member.last_name }}</li>
+          {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
